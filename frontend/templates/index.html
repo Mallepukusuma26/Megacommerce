@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MegaCommerce — Enterprise Commerce Ecosystem</title>
+  <meta name="description" content="MegaCommerce Master Full-Stack Commerce Ecosystem operating 100% locally with zero external API keys.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/design_system.css">
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar">
+    <div class="brand-title">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 01-8 0"></path>
+      </svg>
+      MegaCommerce
+    </div>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a class="nav-item active" onclick="switchPortal('customer')">Customer Portal</a></li>
+        <li><a class="nav-item" onclick="switchPortal('seller')">Seller Portal</a></li>
+        <li><a class="nav-item" onclick="switchPortal('admin')">Admin Portal</a></li>
+        <li><button class="btn btn-secondary" id="authBtn" onclick="openAuthModal()">Login / Register</button></li>
+        <li><button class="btn btn-primary" onclick="openCartDrawer()">🛒 Cart (<span id="cartCount">0</span>)</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Portal Views Container -->
+  <main class="container">
+
+    <!-- 1. CUSTOMER PORTAL -->
+    <section id="customerPortal" class="portal-view active">
+      <div class="hero-banner">
+        <h1>Welcome to MegaCommerce Ecosystem</h1>
+        <p>Explore thousands of products with local TF-IDF search, AI recommendations, multi-warehouse stock fulfillment, and instant simulated checkout.</p>
+        <button class="btn btn-primary" onclick="loadCatalog()">Browse Catalog</button>
+      </div>
+
+      <!-- Controls & Search Bar -->
+      <div class="search-controls">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search catalog using local vector TF-IDF..." onkeyup="handleSearchInput(event)">
+        <select id="categorySelect" class="select-filter" onchange="loadCatalog()">
+          <option value="">All Categories</option>
+        </select>
+        <select id="sortSelect" class="select-filter" onchange="loadCatalog()">
+          <option value="relevance">Sort by Relevance</option>
+          <option value="price_low">Price: Low to High</option>
+          <option value="price_high">Price: High to Low</option>
+          <option value="rating">Top Rated</option>
+        </select>
+        <button class="btn btn-primary" onclick="executeSearch()">Search</button>
+      </div>
+
+      <!-- Product Catalog Grid -->
+      <h2 style="margin-bottom: 1rem; font-weight: 700;">Featured Products</h2>
+      <div id="productGrid" class="product-grid">
+        <p style="color: var(--text-muted);">Loading products from local backend database...</p>
+      </div>
+    </section>
+
+    <!-- 2. SELLER PORTAL -->
+    <section id="sellerPortal" class="portal-view">
+      <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1.5rem;">Seller Command Center</h2>
+      
+      <!-- Metrics -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-title">Total Revenue</div>
+          <div class="metric-value" id="sellerRevenue">$0.00</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Orders Fulfilled</div>
+          <div class="metric-value" id="sellerOrders">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Active Products</div>
+          <div class="metric-value" id="sellerProducts">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Seller Rating</div>
+          <div class="metric-value" id="sellerRating">5.0 ★</div>
+        </div>
+      </div>
+
+      <!-- Seller Actions -->
+      <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+        <button class="btn btn-primary" onclick="openAddProductModal()">+ Create New Product</button>
+        <button class="btn btn-secondary" onclick="loadSellerAnalytics()">Refresh Analytics</button>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">My Product Listings</h3>
+      <div id="sellerProductList" class="product-grid">
+        <p style="color: var(--text-muted);">Please log in with a SELLER account to view seller catalog.</p>
+      </div>
+    </section>
+
+    <!-- 3. ADMIN PORTAL -->
+    <section id="adminPortal" class="portal-view">
+      <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1.5rem;">Platform Administration & System Health</h2>
+
+      <!-- Admin Metrics -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-title">Gross Revenue</div>
+          <div class="metric-value" id="adminGrossRev">$0.00</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Total Platform Orders</div>
+          <div class="metric-value" id="adminTotalOrders">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Registered Users</div>
+          <div class="metric-value" id="adminUsers">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Fraud Risk Flags</div>
+          <div class="metric-value" id="adminFraudFlags">0</div>
+        </div>
+      </div>
+
+      <div style="background: var(--surface-dark); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem;">Live System Audit Logs</h3>
+        <div id="auditLogList" style="font-family: monospace; font-size: 0.9rem; color: var(--text-muted);">
+          Loading audit stream...
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    MegaCommerce Autonomous Full-Stack Ecosystem &copy; 2026. Built 100% locally with Zero External API Keys.
+  </footer>
+
+  <!-- App JavaScript -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
