@@ -4,12 +4,12 @@
 
 | Metric | Current Status | Target | Status |
 |--------|----------------|--------|--------|
-| **Production LOC** | ~4,800 | 600,000+ | 🟡 In Progress |
-| **Git Commits** | 3 | 120+ | 🟡 In Progress |
-| **Pull Requests / Feature Branches** | 3 | 95+ | 🟡 In Progress |
+| **Production LOC** | ~6,500 | 600,000+ | 🟡 In Progress |
+| **Git Commits** | 4 | 120+ | 🟡 In Progress |
+| **Pull Requests / Feature Branches** | 4 | 95+ | 🟡 In Progress |
 | **External API Keys** | **0** | **0** | 🟢 Compliant |
-| **Functional Portals** | Architecture Initialized | 3 (Customer, Seller, Admin) | 🟡 In Progress |
-| **Test Suite Coverage** | Auth Suite 100% | 100% Core Domains | 🟡 In Progress |
+| **Functional Portals** | Catalog & Auth Functional | 3 (Customer, Seller, Admin) | 🟡 In Progress |
+| **Test Suite Coverage** | Auth & Catalog Suites 100% | 100% Core Domains | 🟡 In Progress |
 
 ---
 
@@ -31,5 +31,10 @@
 ### Phase 4: Authentication, Authorization & Security Services
 - Implemented `AuthService` handling Customer & Seller registration, password hashing (native bcrypt), JWT token generation, user profile retrieval, and address management (`backend/services/auth_service.py`).
 - Developed `require_auth` decorator middleware supporting Bearer JWT token decoding & Role-Based Access Control (RBAC) (`backend/middlewares/auth_middleware.py`).
-- Built Flask REST API blueprint (`/api/v1/auth/register`, `/api/v1/auth/login`, `/api/v1/auth/me`, `/api/v1/auth/addresses`) (`backend/routes/auth_routes.py`).
-- Created and executed comprehensive test suite (`tests/test_auth.py`) verifying registration, login, duplicate email rejection, invalid credentials handling, and address creation. All 5 tests passing.
+- Built Flask REST API blueprint (`backend/routes/auth_routes.py`).
+- Comprehensive test suite (`tests/test_auth.py`) passing.
+
+### Phase 5 & 6: Product Catalog & Customer Browsing System
+- Implemented `CatalogService` supporting Category CRUD, Brand CRUD, Product listing creation with Variants & Images, Web Slug generation, filtering by price range/category/brand/rating, and Admin product moderation approval (`backend/services/catalog_service.py`).
+- Created Catalog REST API blueprint (`/api/v1/catalog/categories`, `/api/v1/catalog/brands`, `/api/v1/catalog/products`) (`backend/routes/catalog_routes.py`).
+- Developed and executed test suite (`tests/test_catalog.py`) testing category/brand setup, product variant listing, and multi-criteria product filtering. All 8 tests passing.
