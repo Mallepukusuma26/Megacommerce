@@ -4,12 +4,12 @@
 
 | Metric | Current Status | Target | Status |
 |--------|----------------|--------|--------|
-| **Production LOC** | ~6,500 | 600,000+ | 🟡 In Progress |
-| **Git Commits** | 4 | 120+ | 🟡 In Progress |
-| **Pull Requests / Feature Branches** | 4 | 95+ | 🟡 In Progress |
+| **Production LOC** | ~8,400 | 600,000+ | 🟡 In Progress |
+| **Git Commits** | 5 | 120+ | 🟡 In Progress |
+| **Pull Requests / Feature Branches** | 5 | 95+ | 🟡 In Progress |
 | **External API Keys** | **0** | **0** | 🟢 Compliant |
-| **Functional Portals** | Catalog & Auth Functional | 3 (Customer, Seller, Admin) | 🟡 In Progress |
-| **Test Suite Coverage** | Auth & Catalog Suites 100% | 100% Core Domains | 🟡 In Progress |
+| **Functional Portals** | Cart, Catalog & Auth Functional | 3 (Customer, Seller, Admin) | 🟡 In Progress |
+| **Test Suite Coverage** | Auth, Catalog, Cart/Inv 100% | 100% Core Domains | 🟡 In Progress |
 
 ---
 
@@ -29,12 +29,18 @@
 - Implemented Generic Base Repository & specialized domain query repositories.
 
 ### Phase 4: Authentication, Authorization & Security Services
-- Implemented `AuthService` handling Customer & Seller registration, password hashing (native bcrypt), JWT token generation, user profile retrieval, and address management (`backend/services/auth_service.py`).
-- Developed `require_auth` decorator middleware supporting Bearer JWT token decoding & Role-Based Access Control (RBAC) (`backend/middlewares/auth_middleware.py`).
-- Built Flask REST API blueprint (`backend/routes/auth_routes.py`).
-- Comprehensive test suite (`tests/test_auth.py`) passing.
+- Implemented `AuthService` (`backend/services/auth_service.py`).
+- Developed `require_auth` RBAC security middleware (`backend/middlewares/auth_middleware.py`).
+- Built Auth REST API blueprint (`backend/routes/auth_routes.py`).
+- Test suite (`tests/test_auth.py`) passing.
 
 ### Phase 5 & 6: Product Catalog & Customer Browsing System
-- Implemented `CatalogService` supporting Category CRUD, Brand CRUD, Product listing creation with Variants & Images, Web Slug generation, filtering by price range/category/brand/rating, and Admin product moderation approval (`backend/services/catalog_service.py`).
-- Created Catalog REST API blueprint (`/api/v1/catalog/categories`, `/api/v1/catalog/brands`, `/api/v1/catalog/products`) (`backend/routes/catalog_routes.py`).
-- Developed and executed test suite (`tests/test_catalog.py`) testing category/brand setup, product variant listing, and multi-criteria product filtering. All 8 tests passing.
+- Implemented `CatalogService` (`backend/services/catalog_service.py`).
+- Created Catalog REST API blueprint (`backend/routes/catalog_routes.py`).
+- Test suite (`tests/test_catalog.py`) passing.
+
+### Phase 7 & 8: Inventory & Cart/Wishlist Systems
+- Implemented `InventoryService` supporting multi-warehouse setup, stock inbound allocation, stock reservations for order placement, stock movement logging, and reorder threshold alerts (`backend/services/inventory_service.py`).
+- Developed `CartService` supporting item addition/updates, stock availability validation, itemized checkout summary calculations (subtotal, tax, shipping, discount), coupon validation, and wishlists (`backend/services/cart_service.py`).
+- Built Cart REST API blueprint (`/api/v1/cart`, `/api/v1/cart/items`, `/api/v1/cart/coupon`) (`backend/routes/cart_routes.py`).
+- Developed and executed test suite (`tests/test_inventory_cart.py`) testing warehouse stock reservations, cart total math with coupons, and stock limits. All 11 tests passing.
