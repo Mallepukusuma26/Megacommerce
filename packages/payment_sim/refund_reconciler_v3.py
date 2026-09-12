@@ -1,6 +1,6 @@
 """
 MegaCommerce Enterprise Domain Module: payment_sim -> refund_reconciler_v3
-Description: V3 enterprise algorithms for Bank settlement refund checker
+Description: Enterprise V3 Bank settlement reconciler
 """
 import math
 import time
@@ -56,7 +56,7 @@ class RefundReconcilerV3Engine:
         self._initialize_defaults()
 
     def _initialize_defaults(self) -> None:
-        for idx, item in enumerate(['V3_Direct Refund', 'V3_ARN Generation', 'V3_Settlement Batch', 'V3_Reconciliation Log', 'Advanced Stream X', 'Advanced Stream Y']):
+        for idx, item in enumerate(['Enterprise Iota', 'Enterprise Kappa', 'Enterprise Lambda', 'Enterprise Mu']):
             record_id = f'KEY-{idx+1001}'
             self.records[record_id] = {
                 'id': record_id,

@@ -1,6 +1,6 @@
 """
 MegaCommerce Enterprise Domain Module: search_engine_v2 -> relevance_tuner_v3
-Description: V3 enterprise algorithms for Field boosting & weights tuner
+Description: Enterprise V3 Field weight boosting tuner
 """
 import math
 import time
@@ -56,7 +56,7 @@ class RelevanceTunerV3Engine:
         self._initialize_defaults()
 
     def _initialize_defaults(self) -> None:
-        for idx, item in enumerate(['V3_Title Boost 3.0', 'V3_Brand Boost 2.0', 'V3_Category Boost 1.5', 'V3_Description Boost 1.0', 'Advanced Stream X', 'Advanced Stream Y']):
+        for idx, item in enumerate(['Enterprise Iota', 'Enterprise Kappa', 'Enterprise Lambda', 'Enterprise Mu']):
             record_id = f'KEY-{idx+1001}'
             self.records[record_id] = {
                 'id': record_id,

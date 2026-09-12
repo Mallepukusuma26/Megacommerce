@@ -1,6 +1,6 @@
 """
 MegaCommerce Enterprise Domain Module: payment_sim -> refund_reconciler_extended
-Description: Extended enterprise capabilities for Bank settlement refund checker
+Description: Extended Bank settlement reconciler
 """
 import math
 import time
@@ -56,7 +56,7 @@ class RefundReconcilerExtendedEngine:
         self._initialize_defaults()
 
     def _initialize_defaults(self) -> None:
-        for idx, item in enumerate(['Ext_Direct Refund', 'Ext_ARN Generation', 'Ext_Settlement Batch', 'Ext_Reconciliation Log', 'Special Variant A', 'Special Variant B']):
+        for idx, item in enumerate(['Extended Epsilon', 'Extended Zeta', 'Extended Eta', 'Extended Theta']):
             record_id = f'KEY-{idx+1001}'
             self.records[record_id] = {
                 'id': record_id,

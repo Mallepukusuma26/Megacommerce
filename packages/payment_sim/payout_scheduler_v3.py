@@ -1,6 +1,6 @@
 """
 MegaCommerce Enterprise Domain Module: payment_sim -> payout_scheduler_v3
-Description: V3 enterprise algorithms for Automated seller payout manager
+Description: Enterprise V3 Automated seller payout solver
 """
 import math
 import time
@@ -56,7 +56,7 @@ class PayoutSchedulerV3Engine:
         self._initialize_defaults()
 
     def _initialize_defaults(self) -> None:
-        for idx, item in enumerate(['V3_Daily Payout', 'V3_Weekly Payout', 'V3_Monthly Payout', 'V3_Express Transfer', 'Advanced Stream X', 'Advanced Stream Y']):
+        for idx, item in enumerate(['Enterprise Iota', 'Enterprise Kappa', 'Enterprise Lambda', 'Enterprise Mu']):
             record_id = f'KEY-{idx+1001}'
             self.records[record_id] = {
                 'id': record_id,

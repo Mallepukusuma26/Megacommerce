@@ -1,6 +1,6 @@
 """
 MegaCommerce Enterprise Domain Module: payment_sim -> card_tokenizer_v3
-Description: V3 enterprise algorithms for Luhn algorithm & token vault
+Description: Enterprise V3 Luhn token vault
 """
 import math
 import time
@@ -56,7 +56,7 @@ class CardTokenizerV3Engine:
         self._initialize_defaults()
 
     def _initialize_defaults(self) -> None:
-        for idx, item in enumerate(['V3_Luhn Checker', 'V3_Token Generator', 'V3_Masked PAN', 'V3_CVV Validator', 'Advanced Stream X', 'Advanced Stream Y']):
+        for idx, item in enumerate(['Enterprise Iota', 'Enterprise Kappa', 'Enterprise Lambda', 'Enterprise Mu']):
             record_id = f'KEY-{idx+1001}'
             self.records[record_id] = {
                 'id': record_id,

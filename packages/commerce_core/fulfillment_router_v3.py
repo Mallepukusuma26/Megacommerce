@@ -1,6 +1,6 @@
 """
 MegaCommerce Enterprise Domain Module: commerce_core -> fulfillment_router_v3
-Description: V3 enterprise algorithms for Order routing algorithm to warehouses
+Description: Enterprise V3 Order routing solver
 """
 import math
 import time
@@ -56,7 +56,7 @@ class FulfillmentRouterV3Engine:
         self._initialize_defaults()
 
     def _initialize_defaults(self) -> None:
-        for idx, item in enumerate(['V3_Closest Warehouse', 'V3_Single Package Route', 'V3_Split Route', 'V3_Cost Optimized Route', 'Advanced Stream X', 'Advanced Stream Y']):
+        for idx, item in enumerate(['Enterprise Iota', 'Enterprise Kappa', 'Enterprise Lambda', 'Enterprise Mu']):
             record_id = f'KEY-{idx+1001}'
             self.records[record_id] = {
                 'id': record_id,

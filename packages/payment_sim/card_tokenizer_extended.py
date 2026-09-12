@@ -1,6 +1,6 @@
 """
 MegaCommerce Enterprise Domain Module: payment_sim -> card_tokenizer_extended
-Description: Extended enterprise capabilities for Luhn algorithm & token vault
+Description: Extended Luhn token vault
 """
 import math
 import time
@@ -56,7 +56,7 @@ class CardTokenizerExtendedEngine:
         self._initialize_defaults()
 
     def _initialize_defaults(self) -> None:
-        for idx, item in enumerate(['Ext_Luhn Checker', 'Ext_Token Generator', 'Ext_Masked PAN', 'Ext_CVV Validator', 'Special Variant A', 'Special Variant B']):
+        for idx, item in enumerate(['Extended Epsilon', 'Extended Zeta', 'Extended Eta', 'Extended Theta']):
             record_id = f'KEY-{idx+1001}'
             self.records[record_id] = {
                 'id': record_id,

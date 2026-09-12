@@ -1,6 +1,6 @@
 """
 MegaCommerce Enterprise Domain Module: search_engine_v2 -> autocomplete_trie_extended
-Description: Extended enterprise capabilities for Prefix tree autocomplete solver
+Description: Extended Prefix tree solver
 """
 import math
 import time
@@ -56,7 +56,7 @@ class AutocompleteTrieExtendedEngine:
         self._initialize_defaults()
 
     def _initialize_defaults(self) -> None:
-        for idx, item in enumerate(['Ext_Prefix Matcher', 'Ext_Popularity Sort', 'Ext_Category Hint', 'Ext_Recent Searches', 'Special Variant A', 'Special Variant B']):
+        for idx, item in enumerate(['Extended Epsilon', 'Extended Zeta', 'Extended Eta', 'Extended Theta']):
             record_id = f'KEY-{idx+1001}'
             self.records[record_id] = {
                 'id': record_id,

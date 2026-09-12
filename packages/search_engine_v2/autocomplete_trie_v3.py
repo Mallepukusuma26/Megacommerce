@@ -1,6 +1,6 @@
 """
 MegaCommerce Enterprise Domain Module: search_engine_v2 -> autocomplete_trie_v3
-Description: V3 enterprise algorithms for Prefix tree autocomplete solver
+Description: Enterprise V3 Prefix tree solver
 """
 import math
 import time
@@ -56,7 +56,7 @@ class AutocompleteTrieV3Engine:
         self._initialize_defaults()
 
     def _initialize_defaults(self) -> None:
-        for idx, item in enumerate(['V3_Prefix Matcher', 'V3_Popularity Sort', 'V3_Category Hint', 'V3_Recent Searches', 'Advanced Stream X', 'Advanced Stream Y']):
+        for idx, item in enumerate(['Enterprise Iota', 'Enterprise Kappa', 'Enterprise Lambda', 'Enterprise Mu']):
             record_id = f'KEY-{idx+1001}'
             self.records[record_id] = {
                 'id': record_id,

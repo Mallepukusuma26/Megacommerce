@@ -1,6 +1,6 @@
 """
 MegaCommerce Enterprise Domain Module: commerce_core -> fulfillment_router_extended
-Description: Extended enterprise capabilities for Order routing algorithm to warehouses
+Description: Extended Order routing solver
 """
 import math
 import time
@@ -56,7 +56,7 @@ class FulfillmentRouterExtendedEngine:
         self._initialize_defaults()
 
     def _initialize_defaults(self) -> None:
-        for idx, item in enumerate(['Ext_Closest Warehouse', 'Ext_Single Package Route', 'Ext_Split Route', 'Ext_Cost Optimized Route', 'Special Variant A', 'Special Variant B']):
+        for idx, item in enumerate(['Extended Epsilon', 'Extended Zeta', 'Extended Eta', 'Extended Theta']):
             record_id = f'KEY-{idx+1001}'
             self.records[record_id] = {
                 'id': record_id,

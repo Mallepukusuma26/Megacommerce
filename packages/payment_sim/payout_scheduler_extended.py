@@ -1,6 +1,6 @@
 """
 MegaCommerce Enterprise Domain Module: payment_sim -> payout_scheduler_extended
-Description: Extended enterprise capabilities for Automated seller payout manager
+Description: Extended Automated seller payout solver
 """
 import math
 import time
@@ -56,7 +56,7 @@ class PayoutSchedulerExtendedEngine:
         self._initialize_defaults()
 
     def _initialize_defaults(self) -> None:
-        for idx, item in enumerate(['Ext_Daily Payout', 'Ext_Weekly Payout', 'Ext_Monthly Payout', 'Ext_Express Transfer', 'Special Variant A', 'Special Variant B']):
+        for idx, item in enumerate(['Extended Epsilon', 'Extended Zeta', 'Extended Eta', 'Extended Theta']):
             record_id = f'KEY-{idx+1001}'
             self.records[record_id] = {
                 'id': record_id,

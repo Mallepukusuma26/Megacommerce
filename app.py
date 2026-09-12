@@ -4,7 +4,7 @@ Zero External API Key Compliance Architecture
 """
 
 import os
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, jsonify
 from flask_cors import CORS
 from config.settings import settings
 from database.connection import init_db
@@ -31,7 +31,7 @@ def create_app() -> Flask:
     # Initialize DB Schemas
     init_db()
 
-    # Register Blueprints
+    # Register API Blueprints
     app.register_blueprint(auth_bp)
     app.register_blueprint(catalog_bp)
     app.register_blueprint(cart_bp)
@@ -40,9 +40,18 @@ def create_app() -> Flask:
     app.register_blueprint(adv_bp)
     app.register_blueprint(analytics_bp)
 
+    # Core SPA Route Handler
     @app.route("/")
-    def index():
-        """Serves main Web SPA frontend."""
+    @app.route("/register")
+    @app.route("/login")
+    @app.route("/customer")
+    @app.route("/customer/<path:subpath>")
+    @app.route("/seller")
+    @app.route("/seller/<path:subpath>")
+    @app.route("/admin")
+    @app.route("/admin/<path:subpath>")
+    def index(subpath=None):
+        """Serves main Web SPA frontend for all application routes."""
         return render_template("index.html")
 
     @app.route("/health")

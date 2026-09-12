@@ -1,6 +1,6 @@
 """
 MegaCommerce Enterprise Domain Module: search_engine_v2 -> relevance_tuner_extended
-Description: Extended enterprise capabilities for Field boosting & weights tuner
+Description: Extended Field weight boosting tuner
 """
 import math
 import time
@@ -56,7 +56,7 @@ class RelevanceTunerExtendedEngine:
         self._initialize_defaults()
 
     def _initialize_defaults(self) -> None:
-        for idx, item in enumerate(['Ext_Title Boost 3.0', 'Ext_Brand Boost 2.0', 'Ext_Category Boost 1.5', 'Ext_Description Boost 1.0', 'Special Variant A', 'Special Variant B']):
+        for idx, item in enumerate(['Extended Epsilon', 'Extended Zeta', 'Extended Eta', 'Extended Theta']):
             record_id = f'KEY-{idx+1001}'
             self.records[record_id] = {
                 'id': record_id,
