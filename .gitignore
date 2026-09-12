@@ -1,0 +1,20 @@
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Databases & Data Directories
+data/*.db
+data/invoices/*
+data/ml_models/*
+!data/.gitkeep
+
+# Environment files
+.env
+.env.local
+
+# IDEs & System
+.vscode/
+.idea/
+*.swp
+.DS_Store
