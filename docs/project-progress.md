@@ -4,12 +4,12 @@
 
 | Metric | Current Status | Target | Status |
 |--------|----------------|--------|--------|
-| **Production LOC** | ~14,200 | 600,000+ | 🟡 In Progress |
-| **Git Commits** | 7 | 120+ | 🟡 In Progress |
-| **Pull Requests / Feature Branches** | 7 | 95+ | 🟡 In Progress |
+| **Production LOC** | ~18,500 | 600,000+ | 🟡 In Progress |
+| **Git Commits** | 8 | 120+ | 🟡 In Progress |
+| **Pull Requests / Feature Branches** | 8 | 95+ | 🟡 In Progress |
 | **External API Keys** | **0** | **0** | 🟢 Compliant |
-| **Functional Portals** | Search, AI Recs & Orders Functional | 3 (Customer, Seller, Admin) | 🟡 In Progress |
-| **Test Suite Coverage** | Auth, Catalog, Cart/Inv, Orders, Search/ML 100% | 100% Core Domains | 🟡 In Progress |
+| **Functional Portals** | Advanced ML & Finance Complete | 3 (Customer, Seller, Admin) | 🟡 In Progress |
+| **Test Suite Coverage** | 19 Unit/Integration Tests 100% | 100% Core Domains | 🟡 In Progress |
 
 ---
 
@@ -53,7 +53,16 @@
 - Test suite (`tests/test_orders_simulators.py`) passing.
 
 ### Phase 14 & 15: Local Search Engine & Local ML Recommendation Engine
-- Implemented `LocalSearchEngine` featuring TF-IDF vector text normalization, cosine similarity document matching, search suggestions, and category/brand/price faceted filters (`ml_services/search_engine.py`). Zero external search API.
-- Developed `LocalRecommendationEngine` providing content-based vector similarity, order co-occurrence "frequently bought together" matrix rules, and top-rated popularity fallback (`ml_services/recommendation_engine.py`). Zero external AI API.
-- Built Search & AI REST API blueprint (`/api/v1/search/query`, `/api/v1/search/suggestions`, `/api/v1/recommendations/similar/<id>`, `/api/v1/recommendations/popular`) (`backend/routes/search_rec_routes.py`).
-- Developed and executed test suite (`tests/test_search_recommendations.py`) verifying TF-IDF query relevance, facet filtering, auto-complete suggestions, and similarity scoring. All 15 tests passing.
+- Implemented `LocalSearchEngine` (`ml_services/search_engine.py`).
+- Developed `LocalRecommendationEngine` (`ml_services/recommendation_engine.py`).
+- Built Search & AI REST API blueprint (`backend/routes/search_rec_routes.py`).
+- Test suite (`tests/test_search_recommendations.py`) passing.
+
+### Phase 17, 18, 19, 20 & 21: Local PDF Invoicing, Returns, Fraud Detection, Demand Forecasting & Sales Prediction
+- Implemented `LocalInvoiceService` generating styled ReportLab PDF sales invoices (`backend/services/invoice_service.py`).
+- Developed `ReturnsRefundsService` managing customer return requests, warehouse merchandise inspection, and automated local credit refund processing (`backend/services/returns_refunds_service.py`).
+- Built `LocalFraudDetector` executing multi-rule & anomaly transaction scoring (`ml_services/fraud_detector.py`).
+- Developed `LocalDemandForecaster` executing time-series Ridge regression forecasting over 30-day horizons (`ml_services/demand_forecaster.py`).
+- Implemented `LocalSalesPredictor` modeling 6-month platform revenue trends (`ml_services/sales_predictor.py`).
+- Created Advanced REST API blueprint (`/api/v1/invoices/<id>/pdf`, `/api/v1/returns/request`, `/api/v1/fraud/assess/<id>`, `/api/v1/analytics/forecast/demand/<id>`, `/api/v1/analytics/predictions/sales`) (`backend/routes/advanced_services_routes.py`).
+- Developed and executed test suite (`tests/test_advanced_ml_finance.py`). All 19 tests passing.
