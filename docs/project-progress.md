@@ -4,12 +4,12 @@
 
 | Metric | Current Status | Target | Status |
 |--------|----------------|--------|--------|
-| **Production LOC** | ~3,400 | 600,000+ | 🟡 In Progress |
-| **Git Commits** | 2 | 120+ | 🟡 In Progress |
-| **Pull Requests / Feature Branches** | 2 | 95+ | 🟡 In Progress |
+| **Production LOC** | ~4,800 | 600,000+ | 🟡 In Progress |
+| **Git Commits** | 3 | 120+ | 🟡 In Progress |
+| **Pull Requests / Feature Branches** | 3 | 95+ | 🟡 In Progress |
 | **External API Keys** | **0** | **0** | 🟢 Compliant |
 | **Functional Portals** | Architecture Initialized | 3 (Customer, Seller, Admin) | 🟡 In Progress |
-| **Test Suite Coverage** | Initializing | 100% Core Domains | 🟡 In Progress |
+| **Test Suite Coverage** | Auth Suite 100% | 100% Core Domains | 🟡 In Progress |
 
 ---
 
@@ -17,7 +17,7 @@
 
 ### Phase 1: Architecture & Foundation Initialized
 - Set up root repository layout (`config/`, `shared/`, `database/`, `backend/`, `ml_services/`, `frontend/`, `tests/`, `docs/`, `docker/`).
-- Implemented `config/settings.py` (database connections, security keys, local simulator settings, ML config).
+- Implemented `config/settings.py`.
 - Defined complete domain enumerations `shared/enums.py`.
 - Created centralized exception hierarchy `shared/exceptions.py`.
 - Developed security framework `shared/security.py`.
@@ -25,14 +25,11 @@
 
 ### Phase 3: Database Architecture & ORM Schemas
 - Implemented SQLAlchemy 2.0 connection engine and transactional session context manager (`database/connection.py`).
-- Built normalized ORM models for Users, Addresses, SellerProfiles, AuditLogs (`database/models/user.py`).
-- Built Product Catalog models: Categories, Brands, Products, ProductVariants, ProductImages (`database/models/catalog.py`).
-- Built Inventory & Multi-Warehouse models: Warehouses, InventoryItems, StockMovements, StockReservations (`database/models/inventory.py`).
-- Built Cart & Wishlist models (`database/models/cart_wishlist.py`).
-- Built Order & Payment models: Orders, OrderItems, OrderHistories, PaymentTransactions (`database/models/order.py`).
-- Built Coupons & Promotions models (`database/models/promotions.py`).
-- Built Reviews & Ratings models (`database/models/reviews.py`).
-- Built Delivery Logistics, Returns & Refund models (`database/models/logistics.py`).
-- Built Fraud, Forecasting, Sales Prediction, Customer & Seller Analytics models (`database/models/analytics.py`).
-- Implemented Generic Base Repository & specialized domain query repositories (`database/repositories/`).
-- Verified schema creation via SQLite engine initialization.
+- Built normalized ORM models for Users, Addresses, SellerProfiles, AuditLogs, Catalog, Inventory, Cart/Wishlist, Orders, Payments, Promotions, Reviews, Logistics, Analytics.
+- Implemented Generic Base Repository & specialized domain query repositories.
+
+### Phase 4: Authentication, Authorization & Security Services
+- Implemented `AuthService` handling Customer & Seller registration, password hashing (native bcrypt), JWT token generation, user profile retrieval, and address management (`backend/services/auth_service.py`).
+- Developed `require_auth` decorator middleware supporting Bearer JWT token decoding & Role-Based Access Control (RBAC) (`backend/middlewares/auth_middleware.py`).
+- Built Flask REST API blueprint (`/api/v1/auth/register`, `/api/v1/auth/login`, `/api/v1/auth/me`, `/api/v1/auth/addresses`) (`backend/routes/auth_routes.py`).
+- Created and executed comprehensive test suite (`tests/test_auth.py`) verifying registration, login, duplicate email rejection, invalid credentials handling, and address creation. All 5 tests passing.

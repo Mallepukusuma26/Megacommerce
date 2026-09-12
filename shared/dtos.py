@@ -56,7 +56,7 @@ class UserResponse(BaseDTO):
 
 # Address DTOs
 class AddressCreateRequest(BaseDTO):
-    title: str = Field(..., example="Home")
+    title: str = Field(..., json_schema_extra={"example": "Home"})
     street_address: str
     apartment_unit: Optional[str] = None
     city: str

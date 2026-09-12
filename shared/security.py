@@ -1,29 +1,35 @@
 """
 MegaCommerce Security, Token Management, & Cryptographic Utilities
 Zero External API Key Compliance Architecture
+Direct Bcrypt & PyJWT Implementation
 """
 
 import datetime
 from typing import Optional, Dict, Any, List
+import bcrypt
 import jwt
-from passlib.context import CryptContext
 from config.settings import settings
 from shared.enums import UserRole
 from shared.exceptions import AuthenticationError, AuthorizationError
 
 
-# Cryptographic Context using Bcrypt
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-
 def hash_password(plain_password: str) -> str:
-    """Hashes a plain-text password using bcrypt algorithm."""
-    return pwd_context.hash(plain_password)
+    """Hashes a plain-text password using native bcrypt algorithm."""
+    # Truncate to 72 bytes if needed (bcrypt standard limit)
+    pwd_bytes = plain_password.encode('utf-8')[:72]
+    salt = bcrypt.gensalt(rounds=settings.security.BCRYPT_ROUNDS)
+    hashed = bcrypt.hashpw(pwd_bytes, salt)
+    return hashed.decode('utf-8')
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Verifies a plain-text password against a hashed bcrypt password."""
-    return pwd_context.verify(plain_password, hashed_password)
+    """Verifies a plain-text password against a hashed bcrypt password string."""
+    try:
+        pwd_bytes = plain_password.encode('utf-8')[:72]
+        hash_bytes = hashed_password.encode('utf-8')
+        return bcrypt.checkpw(pwd_bytes, hash_bytes)
+    except Exception:
+        return False
 
 
 def create_access_token(
