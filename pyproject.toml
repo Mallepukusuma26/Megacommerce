@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "megacommerce"
+version = "1.0.0"
+description = "Enterprise Full-Stack Commerce Ecosystem Operating 100% Locally with Zero External API Keys"
+authors = [{ name = "Mallepukusuma26", email = "kusumamallepu2@gmail.com" }]
+readme = "README.md"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "--cov=. --cov-config=.coveragerc"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["backend", "ml_services", "packages", "shared", "config", "database"]

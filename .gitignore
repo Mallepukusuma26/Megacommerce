@@ -13,6 +13,11 @@ data/ml_models/*
 .env
 .env.local
 
+# Testing & Coverage
+.coverage
+.pytest_cache/
+htmlcov/
+
 # IDEs & System
 .vscode/
 .idea/
