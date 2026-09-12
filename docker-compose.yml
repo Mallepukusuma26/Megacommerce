@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: megacommerce_web
+    ports:
+      - "5000:5000"
+    environment:
+      - ENVIRONMENT=production
+      - PORT=5000
+      - DB_TYPE=sqlite
+      - SECRET_KEY=megacommerce-super-secure-local-jwt-secret-key-2026-v1
+    volumes:
+      - megacommerce_data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  megacommerce_data:
