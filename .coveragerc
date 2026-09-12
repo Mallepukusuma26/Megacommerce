@@ -1,0 +1,21 @@
+[run]
+branch = True
+source =
+    backend
+    ml_services
+    packages
+    shared
+    config
+    database
+
+omit =
+    tests/*
+    scripts/*
+    data/*
+
+[report]
+show_missing = True
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise NotImplementedError

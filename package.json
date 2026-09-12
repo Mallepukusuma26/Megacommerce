@@ -1,0 +1,17 @@
+{
+  "name": "megacommerce",
+  "version": "1.0.0",
+  "description": "Enterprise-grade full-stack commerce ecosystem with zero external API keys",
+  "main": "frontend/static/js/app.js",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "python app.py",
+    "test": "pytest tests/"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.1",
+    "font-awesome": "^4.7.0"
+  }
+}
