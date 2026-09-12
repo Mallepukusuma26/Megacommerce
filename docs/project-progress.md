@@ -4,12 +4,12 @@
 
 | Metric | Current Status | Target | Status |
 |--------|----------------|--------|--------|
-| **Production LOC** | ~11,200 | 600,000+ | 🟡 In Progress |
-| **Git Commits** | 6 | 120+ | 🟡 In Progress |
-| **Pull Requests / Feature Branches** | 6 | 95+ | 🟡 In Progress |
+| **Production LOC** | ~14,200 | 600,000+ | 🟡 In Progress |
+| **Git Commits** | 7 | 120+ | 🟡 In Progress |
+| **Pull Requests / Feature Branches** | 7 | 95+ | 🟡 In Progress |
 | **External API Keys** | **0** | **0** | 🟢 Compliant |
-| **Functional Portals** | Orders, Simulators & Cart Functional | 3 (Customer, Seller, Admin) | 🟡 In Progress |
-| **Test Suite Coverage** | Auth, Catalog, Cart/Inv, Orders 100% | 100% Core Domains | 🟡 In Progress |
+| **Functional Portals** | Search, AI Recs & Orders Functional | 3 (Customer, Seller, Admin) | 🟡 In Progress |
+| **Test Suite Coverage** | Auth, Catalog, Cart/Inv, Orders, Search/ML 100% | 100% Core Domains | 🟡 In Progress |
 
 ---
 
@@ -46,8 +46,14 @@
 - Test suite (`tests/test_inventory_cart.py`) passing.
 
 ### Phase 9, 10 & 11: Orders, Payment Simulator & Logistics Delivery Engine
-- Implemented `PaymentSimulatorEngine` supporting Card, UPI, Wallet, NetBanking, and COD simulation with custom gateway audit logging, failure simulation triggers, and transaction logging (`backend/services/payment_simulator.py`).
-- Developed `DeliverySimulatorEngine` handling warehouse packing, tracking number generation, automated delivery agent dispatching, and route event updates (`backend/services/delivery_simulator.py`).
-- Built `OrderService` orchestrating cart checkout, stock reservations, payment gateway triggers, order cart clearing, and strict state transitions (`CREATED` -> `CONFIRMED` -> `PROCESSING` -> `SHIPPED` -> `DELIVERED`) (`backend/services/order_service.py`).
-- Created Order REST API blueprint (`/api/v1/orders/checkout`, `/api/v1/orders/history`, `/api/v1/orders/<id>/status`) (`backend/routes/order_routes.py`).
-- Developed and executed test suite (`tests/test_orders_simulators.py`) testing end-to-end checkout, payment gateway success/failure simulation, and delivery agent route status updates. All 13 tests passing.
+- Implemented `PaymentSimulatorEngine` (`backend/services/payment_simulator.py`).
+- Developed `DeliverySimulatorEngine` (`backend/services/delivery_simulator.py`).
+- Built `OrderService` (`backend/services/order_service.py`).
+- Created Order REST API blueprint (`backend/routes/order_routes.py`).
+- Test suite (`tests/test_orders_simulators.py`) passing.
+
+### Phase 14 & 15: Local Search Engine & Local ML Recommendation Engine
+- Implemented `LocalSearchEngine` featuring TF-IDF vector text normalization, cosine similarity document matching, search suggestions, and category/brand/price faceted filters (`ml_services/search_engine.py`). Zero external search API.
+- Developed `LocalRecommendationEngine` providing content-based vector similarity, order co-occurrence "frequently bought together" matrix rules, and top-rated popularity fallback (`ml_services/recommendation_engine.py`). Zero external AI API.
+- Built Search & AI REST API blueprint (`/api/v1/search/query`, `/api/v1/search/suggestions`, `/api/v1/recommendations/similar/<id>`, `/api/v1/recommendations/popular`) (`backend/routes/search_rec_routes.py`).
+- Developed and executed test suite (`tests/test_search_recommendations.py`) verifying TF-IDF query relevance, facet filtering, auto-complete suggestions, and similarity scoring. All 15 tests passing.
