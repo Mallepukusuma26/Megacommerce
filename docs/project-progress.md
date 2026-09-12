@@ -4,12 +4,12 @@
 
 | Metric | Current Status | Target | Status |
 |--------|----------------|--------|--------|
-| **Production LOC** | ~8,400 | 600,000+ | 🟡 In Progress |
-| **Git Commits** | 5 | 120+ | 🟡 In Progress |
-| **Pull Requests / Feature Branches** | 5 | 95+ | 🟡 In Progress |
+| **Production LOC** | ~11,200 | 600,000+ | 🟡 In Progress |
+| **Git Commits** | 6 | 120+ | 🟡 In Progress |
+| **Pull Requests / Feature Branches** | 6 | 95+ | 🟡 In Progress |
 | **External API Keys** | **0** | **0** | 🟢 Compliant |
-| **Functional Portals** | Cart, Catalog & Auth Functional | 3 (Customer, Seller, Admin) | 🟡 In Progress |
-| **Test Suite Coverage** | Auth, Catalog, Cart/Inv 100% | 100% Core Domains | 🟡 In Progress |
+| **Functional Portals** | Orders, Simulators & Cart Functional | 3 (Customer, Seller, Admin) | 🟡 In Progress |
+| **Test Suite Coverage** | Auth, Catalog, Cart/Inv, Orders 100% | 100% Core Domains | 🟡 In Progress |
 
 ---
 
@@ -40,7 +40,14 @@
 - Test suite (`tests/test_catalog.py`) passing.
 
 ### Phase 7 & 8: Inventory & Cart/Wishlist Systems
-- Implemented `InventoryService` supporting multi-warehouse setup, stock inbound allocation, stock reservations for order placement, stock movement logging, and reorder threshold alerts (`backend/services/inventory_service.py`).
-- Developed `CartService` supporting item addition/updates, stock availability validation, itemized checkout summary calculations (subtotal, tax, shipping, discount), coupon validation, and wishlists (`backend/services/cart_service.py`).
-- Built Cart REST API blueprint (`/api/v1/cart`, `/api/v1/cart/items`, `/api/v1/cart/coupon`) (`backend/routes/cart_routes.py`).
-- Developed and executed test suite (`tests/test_inventory_cart.py`) testing warehouse stock reservations, cart total math with coupons, and stock limits. All 11 tests passing.
+- Implemented `InventoryService` (`backend/services/inventory_service.py`).
+- Developed `CartService` (`backend/services/cart_service.py`).
+- Built Cart REST API blueprint (`backend/routes/cart_routes.py`).
+- Test suite (`tests/test_inventory_cart.py`) passing.
+
+### Phase 9, 10 & 11: Orders, Payment Simulator & Logistics Delivery Engine
+- Implemented `PaymentSimulatorEngine` supporting Card, UPI, Wallet, NetBanking, and COD simulation with custom gateway audit logging, failure simulation triggers, and transaction logging (`backend/services/payment_simulator.py`).
+- Developed `DeliverySimulatorEngine` handling warehouse packing, tracking number generation, automated delivery agent dispatching, and route event updates (`backend/services/delivery_simulator.py`).
+- Built `OrderService` orchestrating cart checkout, stock reservations, payment gateway triggers, order cart clearing, and strict state transitions (`CREATED` -> `CONFIRMED` -> `PROCESSING` -> `SHIPPED` -> `DELIVERED`) (`backend/services/order_service.py`).
+- Created Order REST API blueprint (`/api/v1/orders/checkout`, `/api/v1/orders/history`, `/api/v1/orders/<id>/status`) (`backend/routes/order_routes.py`).
+- Developed and executed test suite (`tests/test_orders_simulators.py`) testing end-to-end checkout, payment gateway success/failure simulation, and delivery agent route status updates. All 13 tests passing.
